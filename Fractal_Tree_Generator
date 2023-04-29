@@ -1,0 +1,43 @@
+"```python
+import turtle
+import random
+
+def draw_branch(t, branch_len, angle_shift_range):
+    angle_shift = random.uniform(*angle_shift_range)
+    sf = random.uniform(0.6, 0.8)
+    size = branch_len / 10
+    t.pensize(size)
+    if branch_len < 20:
+        t.pencolor('forest green')
+    else:
+        t.pencolor('saddle brown')
+    if branch_len > 10:
+        t.fd(branch_len)
+        t.left(30 * angle_shift)
+        draw_branch(t, branch_len * sf, angle_shift_range)
+        t.right(60 * angle_shift)
+        draw_branch(t, branch_len * sf, angle_shift_range)
+        t.left(30 * angle_shift)
+        t.penup()
+        t.backward(branch_len)
+        t.pendown()
+
+def draw_tree(tree_height):
+    t = turtle.Turtle()
+    win = turtle.Screen()
+    win.bgcolor('sky blue')
+    win.title(f'Fractal Tree height:{tree_height}')
+    t.speed(0)
+    t.penup()
+    t.goto(0, -tree_height / 2)
+    t.pendown()
+    t.setheading(90)
+    draw_branch(t, tree_height, (0.5, 1.0))
+    t.hideturtle()
+    win.mainloop()
+
+if __name__ == '__main__':
+    draw_tree(100)
+```
+
+这段 Python 代码使用 Turtle 库绘制一棵随机生长的分形树。树的枝叶分布、大小、角度等都有一定程度的随机性，使得绘制出的每棵树都具有独特性。"
